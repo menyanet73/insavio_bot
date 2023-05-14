@@ -1,0 +1,19 @@
+version: "3.6"
+
+#### Templates ####
+x-logging-common: &logging-common
+  logging:
+    options:
+      max-size: '10m'
+      max-file: '3'
+
+services:
+  insavio:
+    container_name: insavio
+    image: insavio
+    build: .
+    command: python /app/main.py
+    env_file:
+    - ./.env
+    restart: always
+    <<: *logging-common
